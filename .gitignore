@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# BitcoinJS proj
+/nodejs/BitcoinJS/node_modules/
+/nodejs/BitcoinJS/package-lock.json
