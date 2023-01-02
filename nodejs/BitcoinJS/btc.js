@@ -65,6 +65,18 @@ async function createTransaction() {
     let transactionHex = transaction.build().toHex();
 
     console.log(transactionHex)
+
+    return transactionHex;
+}
+
+async function publishTransaction() {
+    let hexTx = await createTransaction();
+
+    let url = blockExplorerTestnetApiEndpoint + "tx/send";
+
+    let result = await http.post(url, { rawTx: hexTx });
+
+    console.log(result);
 }
 
 /**
