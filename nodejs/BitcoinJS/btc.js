@@ -61,12 +61,12 @@ async function createTransaction() {
     let transaction = new btc.TransactionBuilder(network);
     transaction.addInput(lastIncomingTx.txid, lastIncoming);
     transaction.addOutput(AlicePublic, amount);
-    transaction.sign(0, BobPrivate)
+    transaction.sign(0, BobPrivate)//TODO use full key pair object (bobKeys)
+    let transactionHex = transaction.build().toHex();
 
-    console.log(transaction)
+    console.log(transactionHex)
 }
 
-getKeys()
 /**
  ==========keys=======
  ====>alice
