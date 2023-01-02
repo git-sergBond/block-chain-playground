@@ -2,6 +2,7 @@
   "name": "BitcoinJS-tests",
   "version": "1.0.0",
   "dependencies": {
-    "bitcoinjs-lib" : "3.0.2"
+    "bitcoinjs-lib" : "3.0.2",
+    "axios" : "1.2.2"
   }
 }
