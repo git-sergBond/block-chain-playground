@@ -51,10 +51,16 @@ async function getBalance(address) {
 //step 1.
 //send some money to Alice with test network faucet
 //and check this by line code below
-//getBalance(AliceKeys.address);
-//address: 0x73C2Ca66fa68A8cf7baACb70462699438279F202
-//getBalance: 200000000000000000
-
+getBalance(AliceKeys.address);
+getBalance(BobKeys.address);
+/*
+AliceKeys
+address: 0x73C2Ca66fa68A8cf7baACb70462699438279F202
+getBalance: 194800000000000000
+BobKeys
+address: 0x16a97719deD7aBBf63ec983FCBf35Adbd7EEbd63
+getBalance: 1000000000000000
+*/
 
 async function signTransaction() {
     const tx = {
@@ -105,7 +111,7 @@ async function sendTransaction() {
     console.log(res);
 }
 
-sendTransaction();
+//sendTransaction();
 /*
 sendTransaction
 {
