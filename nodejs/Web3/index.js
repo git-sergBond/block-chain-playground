@@ -16,7 +16,7 @@ function createAccounts() {
 
 //step 0.
 //uncomment line code below to create accounts Alice & Bob
-createAccounts();
+//createAccounts();
 
 //for https://sepolia.dev/
 /*
@@ -50,4 +50,4 @@ async function getBalance(address) {
 //step 1.
 //send some money to Alice with test network faucet
 //and check this by line code below
-//getBalance(AliceKeys.address);
+getBalance(AliceKeys.address);
