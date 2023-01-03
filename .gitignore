@@ -106,3 +106,7 @@ dist
 # BitcoinJS proj
 /nodejs/BitcoinJS/node_modules/
 /nodejs/BitcoinJS/package-lock.json
+
+# Web3 proj
+/nodejs/Web3/node_modules/
+/nodejs/Web3/package-lock.json
