@@ -44,10 +44,43 @@ var BobKeys = {
 
 async function getBalance(address) {
     let res = await web3.eth.getBalance(address);
-    console.log(res);
+    console.log("address: " + address);
+    console.log("getBalance: " + res);
 }
 
 //step 1.
 //send some money to Alice with test network faucet
 //and check this by line code below
-getBalance(AliceKeys.address);
+//getBalance(AliceKeys.address);
+//address: 0x73C2Ca66fa68A8cf7baACb70462699438279F202
+//getBalance: 200000000000000000
+
+
+async function signTransaction() {
+    let tx = {
+        from: AliceKeys.address,
+        gasPrice: 20_000_000_000,
+        gas: 42_000,
+        to: BobKeys.address,
+        value: 1_000_000_000_000_000,
+        data: ""
+    }
+
+    let signedTx = await web3.eth.accounts.signTransaction(tx, AliceKeys.privateKey);
+
+    console.log("signedTx");
+    console.log(signedTx);
+}
+
+signTransaction();
+/*
+signedTx
+{
+  messageHash: '2b357d7689b9e2b6e73d17e2222aec29b0ad0d36f91c4127faeb3deba79a6044',
+  v: '0x2d',
+  r: '0x08aa0ad2c09a52d1753f283fd6452e7d02757a94c22c0aa54fe7a0d8bd5847db',
+  s: '0x5a162b05e760661671dc1d6ff01c8f079911f3420a3a9397e78ba2089d056ac5',
+  rawTransaction: '0xf86b808504a817c80082a4109416a97719ded7abbf63ec983fcbf35adbd7eebd6387038d7ea4c68000802da008aa0ad2c09a52d1753f283fd6452e7d02757a94c22c0aa54fe7a0d8bd5847dba05a162b05e760661671dc1d6ff01c8f079911f3420a3a9397e78ba2089d056ac5',
+  transactionHash: '0x1437d2eadc8b139725ffad6a9443c4ba8d714f946f938ee9451eada7516c19f2'
+}
+ */
