@@ -59,21 +59,34 @@ async function getBalance(address) {
 async function signTransaction() {
     let tx = {
         from: AliceKeys.address,
-        gasPrice: 20_000_000_000,
-        gas: 42_000,
+        gasPrice: (200_000_000_000).toString(10),
+        gas: (500_000).toString(10),
         to: BobKeys.address,
-        value: 1_000_000_000_000_000,
+        value: (1_000_000_000_000_000).toString(10),
         data: ""
     }
+
+    console.log("tx");
+    console.log(tx);
 
     let signedTx = await web3.eth.accounts.signTransaction(tx, AliceKeys.privateKey);
 
     console.log("signedTx");
     console.log(signedTx);
+
+    return signedTx;
 }
 
-signTransaction();
 /*
+tx
+{
+  from: '0x73C2Ca66fa68A8cf7baACb70462699438279F202',
+  gasPrice: '20000000000',
+  gas: '42000',
+  to: '0x16a97719deD7aBBf63ec983FCBf35Adbd7EEbd63',
+  value: '1000000000000000',
+  data: ''
+}
 signedTx
 {
   messageHash: '2b357d7689b9e2b6e73d17e2222aec29b0ad0d36f91c4127faeb3deba79a6044',
@@ -83,4 +96,16 @@ signedTx
   rawTransaction: '0xf86b808504a817c80082a4109416a97719ded7abbf63ec983fcbf35adbd7eebd6387038d7ea4c68000802da008aa0ad2c09a52d1753f283fd6452e7d02757a94c22c0aa54fe7a0d8bd5847dba05a162b05e760661671dc1d6ff01c8f079911f3420a3a9397e78ba2089d056ac5',
   transactionHash: '0x1437d2eadc8b139725ffad6a9443c4ba8d714f946f938ee9451eada7516c19f2'
 }
+
+Process finished with exit code 0
+
  */
+
+async function sendTransaction() {
+    let rawTransaction = (await signTransaction()).rawTransaction; //16ричное представление подписанной транзакци
+    let res = await web3.eth.sendTransaction(rawTransaction);
+    console.log("sendTransaction:");
+    console.log(res);
+}
+
+sendTransaction();
