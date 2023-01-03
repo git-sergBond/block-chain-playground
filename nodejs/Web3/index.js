@@ -14,7 +14,8 @@ function createAccounts() {
     console.log(BobKeys);
 }
 
-//use this function once to create accounts Alice & Bob
+//step 0.
+//uncomment line code below to create accounts Alice & Bob
 //createAccounts();
 
 var AliceKeys = {
@@ -27,4 +28,12 @@ var BobKeys = {
     privateKey: '0x001487eb4bb6b977dd8fffddbf4655082b15bf1dcdc2b7b0e4f8b4008a3dd04c',
 }
 
+async function getBalance(address) {
+    let res = await web3.eth.getBalance(address);
+    console.log(res);
+}
 
+//step 1.
+//send some money to Alice with test network faucet
+//and check this by line code below
+getBalance(AliceKeys.address);
