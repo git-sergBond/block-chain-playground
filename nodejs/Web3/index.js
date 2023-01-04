@@ -3,6 +3,7 @@ var createAccounts = require("./service/createAccounts");
 var getBalance = require("./service/getBalance");
 var transactionFromAliceToBob = require("./service/transactionFromAliceToBob");
 var deployHelloWorldContractWay1 = require("./service/deployHelloWorldContractWay1");
+var deployHelloWorldContractWay2 = require("./service/deployHelloWorldContractWay2");
 
 //step 0.
 //uncomment line code below to create accounts Alice & Bob. Copy info from log to nodejs/Web3/constants/accounts.js
@@ -11,8 +12,8 @@ var deployHelloWorldContractWay1 = require("./service/deployHelloWorldContractWa
 //step 1.
 //send some money to Alice with test network faucet
 //and check this by line code below
-getBalance(AliceKeys.address);
-getBalance(BobKeys.address);
+//getBalance(AliceKeys.address);
+//getBalance(BobKeys.address);
 /*
 AliceKeys
 address: 0x73C2Ca66fa68A8cf7baACb70462699438279F202
@@ -61,4 +62,4 @@ BYTECODE:
 	"sourceMap": "157:194:0:-;;;207:57;8:9:-1;5:2;;;30:1;27;20:12;5:2;207:57:0;233:23;;;;;;;;;;;;;;;;;;:7;:23;;;;;;;;;;;;:::i;:::-;;157:194;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;"
 }
 */
-//deployHelloWorldContractWay1();
+//deployHelloWorldContractWay2();
