@@ -4,6 +4,7 @@ var getBalance = require("./service/getBalance");
 var transactionFromAliceToBob = require("./service/transactionFromAliceToBob");
 var deployHelloWorldContractWay1 = require("./service/deployHelloWorldContractWay1");
 var deployHelloWorldContractWay2 = require("./service/deployHelloWorldContractWay2");
+var callHelloWorldContract = require("./service/callHelloWorldContract");
 
 //==========CREATE ACCOUNTS==========
 //step 0. uncomment this line: createAccounts();
@@ -22,3 +23,5 @@ var deployHelloWorldContractWay2 = require("./service/deployHelloWorldContractWa
 //step 7. uncomment this line: deployHelloWorldContractWay1();
 //step 8. uncomment this line: deployHelloWorldContractWay2();
 
+//==========CALL SMART-CONTRACT==========
+//step 9. uncomment this line: callHelloWorldContract();
