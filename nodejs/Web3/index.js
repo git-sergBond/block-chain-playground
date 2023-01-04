@@ -1,18 +1,18 @@
 var { AliceKeys, BobKeys} = require("./constants/accounts");
 var createAccounts = require("./service/createAccounts");
 var getBalance = require("./service/getBalance");
+var transactionFromAliceToBob = require("./service/transactionFromAliceToBob");
+var deployHelloWorldContractWay1 = require("./service/deployHelloWorldContractWay1");
 
 //step 0.
-//uncomment line code below to create accounts Alice & Bob
-//createAccounts.js();
+//uncomment line code below to create accounts Alice & Bob. Copy info from log to nodejs/Web3/constants/accounts.js
+//createAccounts();
 
 //step 1.
 //send some money to Alice with test network faucet
 //and check this by line code below
 getBalance(AliceKeys.address);
 getBalance(BobKeys.address);
-
-
 /*
 AliceKeys
 address: 0x73C2Ca66fa68A8cf7baACb70462699438279F202
@@ -22,80 +22,14 @@ address: 0x16a97719deD7aBBf63ec983FCBf35Adbd7EEbd63
 getBalance: 1000000000000000
 */
 
-async function signTransaction() {
-    const tx = {
-        from: AliceKeys.address,
-        gasPrice: (200_000_000_000).toString(10),
-        gas: (500_000).toString(10),
-        to: BobKeys.address,
-        value: (1_000_000_000_000_000).toString(10),
-        data: ""
-    }
 
-    console.log("tx");
-    console.log(tx);
-
-    let signedTx = await web3.eth.accounts.signTransaction(tx, AliceKeys.privateKey);
-
-    console.log("signedTx");
-    console.log(signedTx);
-
-    return signedTx;
-}
-
-/*
-tx
-{
-  from: '0x73C2Ca66fa68A8cf7baACb70462699438279F202',
-  gasPrice: '200000000000',
-  gas: '500000',
-  to: '0x16a97719deD7aBBf63ec983FCBf35Adbd7EEbd63',
-  value: '1000000000000000',
-  data: ''
-}
-signedTx
-{
-  messageHash: '0x5290bca3d52642046e3bf6b4376c598ba1d9efc01569734b1bdf600a3614dc74',
-  v: '0x2d',
-  r: '0xb3e58822f1833bd1fea5aa5ffd5c72aa6b017cca3934bd30b9e50a207487fd9d',
-  s: '0x2a18d4838e01e76ca0db9f5e8cc36bca6c7cc51f636a82c5ed9fe3ec2e65bd9f',
-  rawTransaction: '0xf86c80852e90edd0008307a1209416a97719ded7abbf63ec983fcbf35adbd7eebd6387038d7ea4c68000802da0b3e58822f1833bd1fea5aa5ffd5c72aa6b017cca3934bd30b9e50a207487fd9da02a18d4838e01e76ca0db9f5e8cc36bca6c7cc51f636a82c5ed9fe3ec2e65bd9f',
-  transactionHash: '0x865d19d54d780cb5573bd3b21279bc7b30392da683f348e25531f5f9e144b40f'
-}
- */
-
-async function sendTransaction() {
-    let rawTransaction = (await signTransaction()).rawTransaction; //16ричное представление подписанной транзакци
-    let res = await web3.eth.sendSignedTransaction(rawTransaction);
-    console.log("sendTransaction:");
-    console.log(res);
-}
-
-//sendTransaction();
-/*
-sendTransaction
-{
-  blockHash: '0x5fb4bfdb8124cbd8c97a95d7ed98c8dd011ac2e3d854c6e80150ff6b9caba828',
-  blockNumber: 8252251,
-  contractAddress: null,
-  cumulativeGasUsed: 21000,
-  effectiveGasPrice: 200000000000,
-  from: '0x73c2ca66fa68a8cf7baacb70462699438279f202',
-  gasUsed: 21000,
-  logs: [],
-  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
-  status: true,
-  to: '0x16a97719ded7abbf63ec983fcbf35adbd7eebd63',
-  transactionHash: '0x865d19d54d780cb5573bd3b21279bc7b30392da683f348e25531f5f9e144b40f',
-  transactionIndex: 0,
-  type: '0x0'
-}
- */
-
+//step 2. test transaction from Alice to Bob
+//transactionFromAliceToBob();
 
 
 /*
-After compile HelloWorld.sol in RemixIDE.
+//step 3. Compile HelloWorld.sol in RemixIDE copy this info to deployHelloWorldContractWay1.js
+//step 4. uncomment deployHelloWorldContractWay1();
 ABI:
 [
     {
@@ -127,245 +61,4 @@ BYTECODE:
 	"sourceMap": "157:194:0:-;;;207:57;8:9:-1;5:2;;;30:1;27;20:12;5:2;207:57:0;233:23;;;;;;;;;;;;;;;;;;:7;:23;;;;;;;;;;;;:::i;:::-;;157:194;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;"
 }
 */
-async function deployHelloWorldContract() {
-    const abi = [
-        {
-            "constant": true,
-            "inputs": [],
-            "name": "Hello",
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "payable": false,
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        }
-    ];
-    const byteCode = "0x"+"608060405234801561001057600080fd5b506040805190810160405280600b81526020017f48656c6c6f20576f726c640000000000000000000000000000000000000000008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b6101a4806101166000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063bcdfe0d514610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b606060008054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561016e5780601f106101435761010080835404028352916020019161016e565b820191906000526020600020905b81548152906001019060200180831161015157829003601f168201915b50505050509050905600a165627a7a72305820f2ace7c272e6d89c8e09a6b13742f821129be7ab698a7e9dbef40572876e99790029";
-
-    const signer = web3.eth.accounts.privateKeyToAccount(AliceKeys.privateKey);
-    web3.eth.accounts.wallet.add(signer);
-
-    var helloWorldContract = new web3.eth.Contract(abi);
-    helloWorldContract.options.data = byteCode;
-    const deployTx = helloWorldContract.deploy();
-
-    let res = await deployTx.send({
-        from: signer.address,
-        gas: await deployTx.estimateGas(),
-        //gasPrice: (200_000_000_000_000).toString(10),
-    }, function (err, transactionHash) {
-        console.error("ERROR helloWorldContract.deploy");
-        console.error(err);
-        console.error(transactionHash);
-    });
-
-    console.log("OK helloWorldContract.deploy");
-    console.log(res);
-
-    getBalance(AliceKeys.address);
-}
-
-//deployHelloWorldContract()
-/*
- _address: '0x97021f3076a59c2643c47055632E49168da93Bcc', //TODO это адрес контракта!!!
-
-
-ERROR helloWorldContract.deploy
-null
-0x7a2c28e5ed91ebe53d7d1d966fdef024300ebc6d858c29a0a3cb9b668d481a36
-OK helloWorldContract.deploy
-Contract {
-  setProvider: [Function (anonymous)],
-  currentProvider: [Getter/Setter],
-  _requestManager: RequestManager {
-    provider: HttpProvider {
-      withCredentials: undefined,
-      timeout: 0,
-      headers: undefined,
-      agent: undefined,
-      connected: false,
-      host: 'https://goerli.infura.io/v3/d23be88a818f4fd9aa03691a48ccf714',
-      httpsAgent: [Agent]
-    },
-    providers: {
-      WebsocketProvider: [Function: WebsocketProvider],
-      HttpProvider: [Function: HttpProvider],
-      IpcProvider: [Function: IpcProvider]
-    },
-    subscriptions: Map(0) {}
-  },
-  givenProvider: null,
-  providers: {
-    WebsocketProvider: [Function: WebsocketProvider],
-    HttpProvider: [Function: HttpProvider],
-    IpcProvider: [Function: IpcProvider]
-  },
-  _provider: HttpProvider {
-    withCredentials: undefined,
-    timeout: 0,
-    headers: undefined,
-    agent: undefined,
-    connected: false,
-    host: 'https://goerli.infura.io/v3/d23be88a818f4fd9aa03691a48ccf714',
-    httpsAgent: Agent {
-      _events: [Object: null prototype],
-      _eventsCount: 2,
-      _maxListeners: undefined,
-      defaultPort: 443,
-      protocol: 'https:',
-      options: [Object: null prototype],
-      requests: [Object: null prototype] {},
-      sockets: [Object: null prototype] {},
-      freeSockets: [Object: null prototype],
-      keepAliveMsecs: 1000,
-      keepAlive: true,
-      maxSockets: Infinity,
-      maxFreeSockets: 256,
-      scheduling: 'lifo',
-      maxTotalSockets: Infinity,
-      totalSocketCount: 0,
-      maxCachedSessions: 100,
-      _sessionCache: [Object],
-      [Symbol(kCapture)]: false
-    }
-  },
-  setRequestManager: [Function (anonymous)],
-  BatchRequest: [Function: bound Batch],
-  extend: [Function: ex] {
-    formatters: {
-      inputDefaultBlockNumberFormatter: [Function: inputDefaultBlockNumberFormatter],
-      inputBlockNumberFormatter: [Function: inputBlockNumberFormatter],
-      inputCallFormatter: [Function: inputCallFormatter],
-      inputTransactionFormatter: [Function: inputTransactionFormatter],
-      inputAddressFormatter: [Function: inputAddressFormatter],
-      inputPostFormatter: [Function: inputPostFormatter],
-      inputLogFormatter: [Function: inputLogFormatter],
-      inputSignFormatter: [Function: inputSignFormatter],
-      inputStorageKeysFormatter: [Function: inputStorageKeysFormatter],
-      outputProofFormatter: [Function: outputProofFormatter],
-      outputBigNumberFormatter: [Function: outputBigNumberFormatter],
-      outputTransactionFormatter: [Function: outputTransactionFormatter],
-      outputTransactionReceiptFormatter: [Function: outputTransactionReceiptFormatter],
-      outputBlockFormatter: [Function: outputBlockFormatter],
-      outputLogFormatter: [Function: outputLogFormatter],
-      outputPostFormatter: [Function: outputPostFormatter],
-      outputSyncingFormatter: [Function: outputSyncingFormatter]
-    },
-    utils: {
-      _fireError: [Function: _fireError],
-      _jsonInterfaceMethodToString: [Function: _jsonInterfaceMethodToString],
-      _flattenTypes: [Function: _flattenTypes],
-      randomHex: [Function: randomHex],
-      BN: [Function: BNwrapped],
-      isBN: [Function: isBN],
-      isBigNumber: [Function: isBigNumber],
-      isHex: [Function: isHex],
-      isHexStrict: [Function: isHexStrict],
-      sha3: [Function],
-      sha3Raw: [Function: sha3Raw],
-      keccak256: [Function],
-      soliditySha3: [Function: soliditySha3],
-      soliditySha3Raw: [Function: soliditySha3Raw],
-      encodePacked: [Function: encodePacked],
-      isAddress: [Function: isAddress],
-      checkAddressChecksum: [Function: checkAddressChecksum],
-      toChecksumAddress: [Function: toChecksumAddress],
-      toHex: [Function: toHex],
-      toBN: [Function: toBN],
-      bytesToHex: [Function: bytesToHex],
-      hexToBytes: [Function: hexToBytes],
-      hexToNumberString: [Function: hexToNumberString],
-      hexToNumber: [Function: hexToNumber],
-      toDecimal: [Function: hexToNumber],
-      numberToHex: [Function: numberToHex],
-      fromDecimal: [Function: numberToHex],
-      hexToUtf8: [Function: hexToUtf8],
-      hexToString: [Function: hexToUtf8],
-      toUtf8: [Function: hexToUtf8],
-      stripHexPrefix: [Function: stripHexPrefix],
-      utf8ToHex: [Function: utf8ToHex],
-      stringToHex: [Function: utf8ToHex],
-      fromUtf8: [Function: utf8ToHex],
-      hexToAscii: [Function: hexToAscii],
-      toAscii: [Function: hexToAscii],
-      asciiToHex: [Function: asciiToHex],
-      fromAscii: [Function: asciiToHex],
-      unitMap: [Object],
-      toWei: [Function: toWei],
-      fromWei: [Function: fromWei],
-      padLeft: [Function: leftPad],
-      leftPad: [Function: leftPad],
-      padRight: [Function: rightPad],
-      rightPad: [Function: rightPad],
-      toTwosComplement: [Function: toTwosComplement],
-      isBloom: [Function: isBloom],
-      isUserEthereumAddressInBloom: [Function: isUserEthereumAddressInBloom],
-      isContractAddressInBloom: [Function: isContractAddressInBloom],
-      isTopic: [Function: isTopic],
-      isTopicInBloom: [Function: isTopicInBloom],
-      isInBloom: [Function: isInBloom],
-      compareBlockNumbers: [Function: compareBlockNumbers],
-      toNumber: [Function: toNumber]
-    },
-    Method: [Function: Method]
-  },
-  clearSubscriptions: [Function (anonymous)],
-  options: {
-    address: [Getter/Setter],
-    jsonInterface: [Getter/Setter],
-    data: '0x608060405234801561001057600080fd5b506040805190810160405280600b81526020017f48656c6c6f20576f726c640000000000000000000000000000000000000000008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b6101a4806101166000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063bcdfe0d514610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b606060008054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561016e5780601f106101435761010080835404028352916020019161016e565b820191906000526020600020905b81548152906001019060200180831161015157829003601f168201915b50505050509050905600a165627a7a72305820f2ace7c272e6d89c8e09a6b13742f821129be7ab698a7e9dbef40572876e99790029',
-    from: undefined,
-    gasPrice: undefined,
-    gas: undefined
-  },
-  handleRevert: [Getter/Setter],
-  defaultCommon: [Getter/Setter],
-  defaultHardfork: [Getter/Setter],
-  defaultChain: [Getter/Setter],
-  transactionPollingTimeout: [Getter/Setter],
-  transactionPollingInterval: [Getter/Setter],
-  transactionConfirmationBlocks: [Getter/Setter],
-  transactionBlockTimeout: [Getter/Setter],
-  blockHeaderTimeout: [Getter/Setter],
-  defaultAccount: [Getter/Setter],
-  defaultBlock: [Getter/Setter],
-  methods: {
-    Hello: [Function: bound _createTxObject],
-    '0xbcdfe0d5': [Function: bound _createTxObject],
-    'Hello()': [Function: bound _createTxObject]
-  },
-  events: { allEvents: [Function: bound ] },
-  _address: '0x97021f3076a59c2643c47055632E49168da93Bcc', //TODO это адрес контракта!!!
-  _jsonInterface: [
-    {
-      constant: true,
-      inputs: [],
-      name: 'Hello',
-      outputs: [Array],
-      payable: false,
-      stateMutability: 'view',
-      type: 'function',
-      signature: '0xbcdfe0d5'
-    },
-    {
-      inputs: [],
-      payable: false,
-      stateMutability: 'nonpayable',
-      type: 'constructor',
-      constant: undefined,
-      signature: 'constructor'
-    }
-  ]
-}
-
- */
+//deployHelloWorldContractWay1();
