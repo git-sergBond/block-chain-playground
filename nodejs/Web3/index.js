@@ -25,4 +25,4 @@ var callHelloWorldContract = require("./service/callHelloWorldContract");
 //step 8. uncomment this line: deployHelloWorldContractWay2();
 
 //==========CALL SMART-CONTRACT==========
-//step 9. uncomment this line: callHelloWorldContract();
+callHelloWorldContract();
