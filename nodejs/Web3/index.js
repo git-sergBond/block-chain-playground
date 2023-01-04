@@ -7,6 +7,7 @@ var deployHelloWorldContractWay2 = require("./service/deployHelloWorldContractWa
 var callHelloWorldContract = require("./service/callHelloWorldContract");
 
 //==========CREATE ACCOUNTS==========
+//init. make preparations, and save API KEY to accounts.js
 //step 0. uncomment this line: createAccounts();
 //step 1. copy info from log to nodejs/Web3/constants/accounts.js
 
