@@ -4,7 +4,8 @@ var getBalance = require("./service/getBalance");
 var transactionFromAliceToBob = require("./service/transactionFromAliceToBob");
 var deployHelloWorldContractWay1 = require("./service/deployHelloWorldContractWay1");
 var deployHelloWorldContractWay2 = require("./service/deployHelloWorldContractWay2");
-var callHelloWorldContract = require("./service/callHelloWorldContract");
+var callHelloWorldContractWay1 = require("./service/callHelloWorldContractWay1");
+var callHelloWorldContractWay2 = require("./service/callHelloWorldContractWay2");
 
 //==========CREATE ACCOUNTS==========
 //init. make preparations, and save API KEY to accounts.js
@@ -25,4 +26,6 @@ var callHelloWorldContract = require("./service/callHelloWorldContract");
 //step 8. uncomment this line: deployHelloWorldContractWay2();
 
 //==========CALL SMART-CONTRACT==========
-callHelloWorldContract();
+//step 9. uncomment this line: callHelloWorldContractWay1();
+//step 10. uncomment this line:
+callHelloWorldContractWay2();
