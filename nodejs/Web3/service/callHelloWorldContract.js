@@ -13,10 +13,20 @@ async function callHelloWorldContract() {
         .send({
             from: signer.address,
             gasLimit: (40_000).toString(10)
+        })
+        .on('receipt', receipt => console.log('receipt' + receipt))
+        .on('data', event => console.log('data' + event))
+        .on('changed', changed => console.log('changed' + changed))
+        .on('error', error => console.log('error' + error))
+        .on('connected', connected => console.log('connected' + connected))
+        .once("transactionHash", (transactionHash) => {
+            console.log('transactionHash/' + transactionHash);
         });
 
     console.log("res");
     console.log(res);
+
+    //TODO HOW TO GET response FROM HelloWorld.Hello() ??? Where is it??? Maybe I write wrong contract???
 }
 
 /*
