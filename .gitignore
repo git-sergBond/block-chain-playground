@@ -110,3 +110,7 @@ dist
 # Web3 proj
 /nodejs/Web3/node_modules/
 /nodejs/Web3/package-lock.json
+
+# Web3FirstApp
+/nodejs/Web3FirstApp/node_modules/
+/nodejs/Web3FirstApp/package-lock.json
