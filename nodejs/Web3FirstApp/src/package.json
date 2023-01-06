@@ -2,6 +2,7 @@
   "name": "Web3-tests",
   "version": "1.0.0",
   "dependencies": {
-    "web3" : "1.8.1"
+    "web3" : "1.8.1",
+    "express" : "4.18.2"
   }
 }

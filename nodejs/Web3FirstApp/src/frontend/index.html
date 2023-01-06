@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Голосование</title>
+    <script src="/web3.min.js"></script>
+</head>
+<body>
+<div>
+    <p>
+        <strong>Голосование</strong>
+    </p>
+
+    <button onclick="getPool()">Узнать тему опроса</button>
+    <div id="poolSubject"></div>
+
+    <p>Ваш выбор: Да <input type="radio" name="voted" id="yes"/> Нет <input type="radio" name="voted" id="No"/></p>
+    <button onclick="submitVote()">Отправить голос</button>
+</div>
+<script>
+    const LOCAL_HTTP_TEST_NET = "http://localhst:8507";
+
+    const HTTP_PROVIDER = LOCAL_HTTP_TEST_NET;
+
+    var web3 = new Web3(new Web3.providers.HttpProvider(HTTP_PROVIDER));
+
+    const PoolContractABI = [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "_voter",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "uint256",
+                    "name": "_value",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Voted",
+            "type": "event"
+        },
+        {
+            "inputs": [],
+            "name": "getPool",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "selection",
+                    "type": "uint256"
+                }
+            ],
+            "name": "vote",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "name": "votes",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ];
+
+    const PoolContractAddress = '0x4B85e1f39420e5E28FE26cF6B5E53B46e052D0ed';
+
+    function getPoolContract() {
+        return new web3.eth.Contract(PoolContractABI, PoolContractAddress);
+    }
+
+    function getPool() {
+        getPoolContract().methods.getPool().call().then(function (value) {
+            document.getElementById('poolSubject').textContent = value;
+        })
+    }
+
+    function submitVote() {
+
+    }
+</script>
+</body>
+</html>
