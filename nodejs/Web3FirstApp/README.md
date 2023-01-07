@@ -19,7 +19,7 @@ Init genesis block: `geth --datadir ./mygeth init ./mygeth/genesis.json`
 <br><br>
 _USUAL ACTIONS:_<br>
 1. Run local Ethereum node:
-<br>WINDOWS: `geth --datadir ./mygeth --networkid 2222 --ipcdisable --port 30307 --http --http.api "eth,web3,personal,net,miner,admin,debug" --http.port 8507 --http.corsdomain "*" --mine --miner.threads=1 --miner.etherbase 0xd3d400f5dDE84921ecdeC16D693C759e8fa972e8`
+<br>WINDOWS: `geth --allow-insecure-unlock --datadir ./mygeth --networkid 2222 --ipcdisable --port 30307 --http --http.api "eth,web3,personal,net,miner,admin,debug" --http.port 8507 --http.corsdomain "*" --mine --miner.threads=1 --miner.etherbase 0xd3d400f5dDE84921ecdeC16D693C759e8fa972e8`
 <br>Sample output:
 `INFO [01-05|09:03:36.146] Started P2P networking 
 self=enode://c90365db96752086ecbeb761d7478e3969a56bb16424cc85076d6a66d0f340114b334bbb2cbc31eb9423bb4dcf21feeb019dc316c5d6b49d9ef1978ead5b2a00@127.0.0.1:30307`

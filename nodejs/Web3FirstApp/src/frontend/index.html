@@ -117,7 +117,9 @@
         }
 
         var admin_address = '0xd3d400f5dDE84921ecdeC16D693C759e8fa972e8';
+        var password = "123";
 
+        web3.eth.personal.unlockAccount(admin_address,password, 15000)
         getPoolContract().methods.vote(value)
             .send({
                 from: admin_address
