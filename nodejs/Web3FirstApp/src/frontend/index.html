@@ -22,7 +22,11 @@
 
     const HTTP_PROVIDER = LOCAL_HTTP_TEST_NET;
 
-    var web3 = new Web3(new Web3.providers.HttpProvider(HTTP_PROVIDER));
+    if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+    } {
+        web3 = new Web3(new Web3.providers.HttpProvider(HTTP_PROVIDER));
+    }
 
     const PoolContractABI = [
         {
