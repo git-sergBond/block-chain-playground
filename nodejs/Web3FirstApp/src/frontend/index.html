@@ -24,16 +24,9 @@
     var admin_password = "123";
 
     function getAddress() {
-        return isUnlockAccount ? admin_address : web3.eth.defaultAccount;
-    }
-
-    function startWithDefaultAccount() {
-        isUnlockAccount = false;
-        web3.eth.defaultAccount = web3.eth.accounts[0];
-    }
-
-    function startWthUnlockAccount() {
-        isUnlockAccount = true;
+        const address = isUnlockAccount ? admin_address : web3.eth.defaultAccount;
+        console.log("used address: " + address);
+        return address;
     }
 
     function beforeSignTx() {
@@ -42,20 +35,38 @@
         }
     }
 
-    function startApp() {
+    function enableApp() {
         document.getElementById('getPoolBtn').disabled = false;
         document.getElementById('submitVoteBtn').disabled = false;
     }
 
     window.addEventListener('load', function () {
-        if (typeof window.web3 !== 'undefined') {
-            //use injected web3 library from 'Metamask' browser plugin
-            web3 = new Web3(web3.currentProvider);
+        // Modern dapp browsers...
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+            web3.eth.getAccounts(function(error, accounts) {
+                console.log("accounts");
+                console.log(accounts);
+
+                if (error !== 'undifined') {
+                    console.log("getAccounts error");
+                    console.log(error);
+                }
+
+                web3.eth.defaultAccount = accounts[0];
+                enableApp();
+            });
+        }
+        // Legacy dapp browsers...
+        else if (window.web3) {
+            window.web3 = new Web3(web3.currentProvider);
 
             // Now you can start your app & access web3 freely:
-            startWithDefaultAccount();
-            startApp();
-        } {
+            web3.eth.defaultAccount = web3.eth.accounts[0];
+            enableApp();
+        }
+        // Non-dapp browsers...
+        else {
             //local dev env wth out 'Metamask' browser plugin
             const LOCAL_HTTP_TEST_NET = "http://localhost:8507";
             web3 = new Web3(new Web3.providers.HttpProvider(LOCAL_HTTP_TEST_NET));
@@ -63,8 +74,8 @@
             alert('Please use Chrome, install Metamask and then try again!')
 
             // Now you can start your app & access web3 freely:
-            startWthUnlockAccount();
-            startApp();
+            isUnlockAccount = true;
+            enableApp();
         }
     })
 
