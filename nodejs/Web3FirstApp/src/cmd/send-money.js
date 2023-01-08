@@ -8,7 +8,7 @@ async function sendMoney(fromAddress, fromPrvateKey, toAddress) {
         gasPrice: (200_000_000_000).toString(10),
         gas: (500_000).toString(10),
         to: toAddress,
-        value: (1_000_000_000_000_000).toString(10),
+        value: (100_000_000_000_000_000).toString(10),
         data: ""
     }
 
