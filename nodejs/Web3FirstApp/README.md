@@ -26,7 +26,7 @@ self=enode://c90365db96752086ecbeb761d7478e3969a56bb16424cc85076d6a66d0f340114b3
 
 2. Compile contract in remix IDE will produce artefacts in folder `artefacts`
 
-2. Run locl server by: static-web-server.js
+3. Run locl server by: static-web-server.js
 
 TODO add second peer https://geth.ethereum.org/docs/fundamentals/peer-to-peer
 <br>_ADD SECOND NODE:_<br>
@@ -38,4 +38,11 @@ Copy settings for genesis block `env\dev\geth\genesis.json` to `mygeth2` folder
 <br>Run local Ethereum node:
 <br>WINDOWS: `geth --datadir ./mygeth2 --networkid 2222 --ipcdisable --port 30308 --http --http.api "eth,web3,personal,net,miner,admin,debug" --http.port 8508 --http.corsdomain '*' --authrpc.port 8558 --bootnodes self=enode://c90365db96752086ecbeb761d7478e3969a56bb16424cc85076d6a66d0f340114b334bbb2cbc31eb9423bb4dcf21feeb019dc316c5d6b49d9ef1978ead5b2a0@127.0.0.1:30307 console`
 <br>Check peers: `admin.peers`
+
+<br><br>
+_FIX PROBLEMS:_<br>
+1. Metamask can not connect to localhost network.
+- go to settings
+- go to `additional` unit, and enable `test networks` option
+- go to `networks` unit, and set right address `http://localhost:8507` AND Chain ID: `2023` (from start log of localhost Node)
 
