@@ -1,1 +1,0 @@
-require("./contracts/Pool").deploy()

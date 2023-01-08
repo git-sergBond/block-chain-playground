@@ -1,4 +1,4 @@
-var web3 = require("../service/web3Provider");
+var web3 = require("../config/web3Provider");
 var poolArtefact = require("./artifacts/Pool.json");
 var poolMetadataArtefact = require("./artifacts/Pool_metadata.json");
 

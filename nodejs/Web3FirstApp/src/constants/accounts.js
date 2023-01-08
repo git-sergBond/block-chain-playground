@@ -1,4 +1,4 @@
-var web3 = require("../service/web3Provider");
+var web3 = require("../config/web3Provider");
 const keyStore = require("./keyStore");
 
 function getPrivateKeyFromKeyStore() {
@@ -10,6 +10,11 @@ var Admin = {
     privateKey: getPrivateKeyFromKeyStore(),
 }
 
+var TestUser = {
+    address: '0x361144247C2758C8489e7b865908Bb464497186e'
+}
+
 module.exports = {
     Admin,
+    TestUser
 }
