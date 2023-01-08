@@ -18,15 +18,20 @@
     <button onclick="submitVote()">Отправить голос</button>
 </div>
 <script>
-    const LOCAL_HTTP_TEST_NET = "http://localhost:8507";
 
-    const HTTP_PROVIDER = LOCAL_HTTP_TEST_NET;
 
-    if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
-    } {
-        web3 = new Web3(new Web3.providers.HttpProvider(HTTP_PROVIDER));
-    }
+
+    window.addEventListener('load', function () {
+        if (typeof web3 !== 'undefined') {
+            //use injected web3 library from 'Metamask' browser plugin
+            web3 = new Web3(web3.currentProvider);
+        } {
+            //local dev env wth out 'Metamask' browser plugin
+            const LOCAL_HTTP_TEST_NET = "http://localhost:8507";
+            web3 = new Web3(new Web3.providers.HttpProvider(LOCAL_HTTP_TEST_NET));
+        }
+    })
+
 
     const PoolContractABI = [
         {
