@@ -19,18 +19,42 @@
 </div>
 <script>
 
+    var isUnlockAccount = false;
+    var admin_address = '0xd3d400f5dDE84921ecdeC16D693C759e8fa972e8';
+    var admin_password = "123";
+
+    function getAddress() {
+        return isUnlockAccount ? admin_address : web3.eth.defaultAccount;
+    }
+
+    function startWithDefaultAccount() {
+        isUnlockAccount = false;
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+    }
+
+    function startWthUnlockAccount() {
+        isUnlockAccount = true;
+    }
+
+    function beforeSignTx() {
+        if (isUnlockAccount) {
+            web3.eth.personal.unlockAccount(admin_address, admin_password, 15000)
+        }
+    }
+
     function startApp() {
         document.getElementById('getPoolBtn').disabled = false;
         document.getElementById('submitVoteBtn').disabled = false;
     }
 
     window.addEventListener('load', function () {
-        if (typeof web3 !== 'undefined') {
+        if (typeof window.web3 !== 'undefined') {
             //use injected web3 library from 'Metamask' browser plugin
             web3 = new Web3(web3.currentProvider);
 
             // Now you can start your app & access web3 freely:
-            startApp()
+            startWithDefaultAccount();
+            startApp();
         } {
             //local dev env wth out 'Metamask' browser plugin
             const LOCAL_HTTP_TEST_NET = "http://localhost:8507";
@@ -39,10 +63,10 @@
             alert('Please use Chrome, install Metamask and then try again!')
 
             // Now you can start your app & access web3 freely:
-            startApp()
+            startWthUnlockAccount();
+            startApp();
         }
     })
-
 
     const PoolContractABI = [
         {
@@ -136,14 +160,10 @@
             return;
         }
 
-        //TODO как удалить эти две строки ниже? Как пользователь должен взаимодействвать с фронтом? Откуда мне прочитать приватный ключ???
-        var admin_address = '0xd3d400f5dDE84921ecdeC16D693C759e8fa972e8';
-        var password = "123";
-
-        web3.eth.personal.unlockAccount(admin_address,password, 15000)
+        beforeSignTx();
         getPoolContract().methods.vote(value)
             .send({
-                from: admin_address
+                from: getAddress()
             })
             .then(function (res) {
                 console.log(res);
