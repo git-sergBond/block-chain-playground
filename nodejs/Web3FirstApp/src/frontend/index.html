@@ -11,24 +11,35 @@
         <strong>Голосование</strong>
     </p>
 
-    <button onclick="getPool()">Узнать тему опроса</button>
+    <button id="getPoolBtn" onclick="getPool()" disabled="true">Узнать тему опроса</button>
     <div id="poolSubject"></div>
 
     <p>Ваш выбор: Да <input type="radio" name="voted" id="yes"/> Нет <input type="radio" name="voted" id="no"/></p>
-    <button onclick="submitVote()">Отправить голос</button>
+    <button id="submitVoteBtn" onclick="submitVote()" disabled="true">Отправить голос</button>
 </div>
 <script>
 
-
+    function startApp() {
+        document.getElementById('getPoolBtn').disabled = false;
+        document.getElementById('submitVoteBtn').disabled = false;
+    }
 
     window.addEventListener('load', function () {
         if (typeof web3 !== 'undefined') {
             //use injected web3 library from 'Metamask' browser plugin
             web3 = new Web3(web3.currentProvider);
+
+            // Now you can start your app & access web3 freely:
+            startApp()
         } {
             //local dev env wth out 'Metamask' browser plugin
             const LOCAL_HTTP_TEST_NET = "http://localhost:8507";
             web3 = new Web3(new Web3.providers.HttpProvider(LOCAL_HTTP_TEST_NET));
+
+            alert('Please use Chrome, install Metamask and then try again!')
+
+            // Now you can start your app & access web3 freely:
+            startApp()
         }
     })
 
