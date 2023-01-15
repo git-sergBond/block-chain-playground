@@ -1,0 +1,61 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "dataToLog",
+						"type": "uint256"
+					}
+				],
+				"name": "logData",
+				"type": "event"
+			}
+		],
+		"devdoc": {
+			"details": "Implements voting process along with vote delegation",
+			"kind": "dev",
+			"methods": {},
+			"title": "Ballot",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Owner.sol": "Owner"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Owner.sol": {
+			"keccak256": "0x169e992a2b87b2b437d03572bde82c3e40b0190c8bc7d4460da3297c3385be59",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://88bf3e9ce6fedd60ecf7ccc1a6369bb1e16dcc241bbd280cb153e775db00f4f8",
+				"dweb:/ipfs/QmehBQXZpNG4kT3Zwr7nre3u6Cy1UPjSYvEMEUJNLyLtrj"
+			]
+		}
+	},
+	"version": 1
+}
