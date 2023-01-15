@@ -5,6 +5,7 @@ import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthBlockNumber;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 
 import java.util.concurrent.ExecutionException;
@@ -28,5 +29,9 @@ public class GeneralService {
 
     public EthGetTransactionCount getTransactionCount(String address) throws ExecutionException, InterruptedException {
         return web3j.ethGetTransactionCount(address, DefaultBlockParameter.valueOf("latest")).sendAsync().get();
+    }
+
+    public EthGetBalance getEthBalance(String address) throws ExecutionException, InterruptedException {
+        return web3j.ethGetBalance(address, DefaultBlockParameter.valueOf("latest")).sendAsync().get();
     }
 }
