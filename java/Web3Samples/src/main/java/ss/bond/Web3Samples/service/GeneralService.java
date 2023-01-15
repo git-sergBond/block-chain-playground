@@ -2,6 +2,7 @@ package ss.bond.Web3Samples.service;
 
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthBlockNumber;
 
 import java.util.concurrent.ExecutionException;
@@ -17,5 +18,9 @@ public class GeneralService {
 
     public EthBlockNumber getBlockNumber() throws ExecutionException, InterruptedException {
         return web3j.ethBlockNumber().sendAsync().get();
+    }
+
+    public EthAccounts getEthAccounts() throws ExecutionException, InterruptedException {
+        return web3j.ethAccounts().sendAsync().get();
     }
 }
