@@ -95,9 +95,13 @@ Summary
 > Final cost:          0.00120500325 ETH
 
 ---Генерация java файлов
+СПОСОБ 1
 1. скопировать solidity/build/contracts/Pool.json
 2. перейти в директорию с web3j
 cd D:\dev\block-chain-playground\java\Web3Samples\web3j\web3j-3.3.1\web3j-3.3.1\bin
 3. сгенерировать код на java
 web3j truffle generate --javaTypes ./in/Pool.json -o ./out -p ss.bond
 4. скопировать полученный код в основной проект, в директорию: src/main/java/ss/bond/Web3Samples/contract
+
+СПОСОБ 2
+Вызвать генерацию через плагин мавена: maven web3j:web3j-maven-plugin:4.9.4:generate-sources

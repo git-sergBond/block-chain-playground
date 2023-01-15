@@ -22,7 +22,13 @@
 		<dependency>
 			<groupId>org.web3j</groupId>
 			<artifactId>core</artifactId>
-			<version>3.3.1</version>
+			<version>4.9.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>web3j-maven-plugin</artifactId>
+			<version>4.9.4</version>
 		</dependency>
 
 
@@ -52,6 +58,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.web3j</groupId>
+				<artifactId>web3j-maven-plugin</artifactId>
+				<version>4.9.4</version>
+				<configuration>
+					<soliditySourceFiles/>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
