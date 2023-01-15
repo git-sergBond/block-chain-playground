@@ -1,0 +1,21 @@
+package ss.bond.Web3Samples.service;
+
+import org.springframework.stereotype.Service;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.EthBlockNumber;
+
+import java.util.concurrent.ExecutionException;
+
+@Service
+public class GeneralService {
+
+    private final Web3j web3j;
+
+    public GeneralService(Web3j web3j) {
+        this.web3j = web3j;
+    }
+
+    public EthBlockNumber getBlockNumber() throws ExecutionException, InterruptedException {
+        return web3j.ethBlockNumber().sendAsync().get();
+    }
+}
