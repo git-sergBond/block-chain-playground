@@ -25,6 +25,7 @@
 			<version>4.9.4</version>
 		</dependency>
 
+		<!-- Генерация wrappers для вызова контрактов из Java кода-->
 		<dependency>
 			<groupId>org.web3j</groupId>
 			<artifactId>web3j-maven-plugin</artifactId>
