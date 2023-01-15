@@ -117,4 +117,5 @@ dist
 
 # Web3Samples
 /java/Web3FirstApp/.mvn/
+/java/Web3FirstApp/.mvn/wrapper
 /java/Web3FirstApp/target/
