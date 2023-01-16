@@ -2,6 +2,7 @@ package ss.bond.Web3Samples.service;
 
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameter;
@@ -47,5 +48,9 @@ public class GeneralService {
 
     public String generateWallet() throws InvalidAlgorithmParameterException, CipherException, IOException, NoSuchAlgorithmException, NoSuchProviderException {
         return WalletUtils.generateNewWalletFile(KEY_STORE_PASSWORD, new File(KEY_STORE_PATH), true);
+    }
+
+    public Credentials getWallet(String fileName) throws CipherException, IOException {
+        return WalletUtils.loadCredentials(KEY_STORE_PASSWORD, KEY_STORE_PATH + '\\' + fileName);
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.web3j.crypto.CipherException;
+import org.web3j.crypto.Credentials;
 import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthBlockNumber;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
@@ -58,5 +59,20 @@ public class GeneralController {
     @PostMapping("/generate-wallet")
     String generateWallet() throws InvalidAlgorithmParameterException, CipherException, IOException, NoSuchAlgorithmException, NoSuchProviderException {
         return generalService.generateWallet();
+    }
+
+    /**
+     * @param fileName - example: UTC--2023-01-16T09-44-14.773919300Z--44d5597848fc7562d9fd6c9a53626f4626f105d1.json
+     * @return {
+     *     "ecKeyPair": {
+     *         "privateKey": 40022878007850285539332362737911154751727374898858647013354620375344720773126,
+     *         "publicKey": 856888547256507861284996752257865080911200029570076912143988032274127449679553609633881581488170870721073224769986149498544743985315748183844640840199457
+     *     },
+     *     "address": "0x44d5597848fc7562d9fd6c9a53626f4626f105d1"
+     * }
+     */
+    @GetMapping("/get-wallet/{fileName}")
+    Credentials getWallet(@PathVariable String fileName) throws CipherException, IOException {
+        return generalService.getWallet(fileName);
     }
 }
