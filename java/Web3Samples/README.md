@@ -113,4 +113,7 @@ Summary
 ---Получение эстимейта gasLimit
 1. Переходим папку в которой хранится проект truffle: cd solidity
 2. Войти в консоль truffle: truffle develop или truffle console
-3. Получить стоимость: <Название смарт-контракта>.new.estimateGas(); Pool.new.estimateGas();
+a) Получить стоимость деплоя контрактов: <Название смарт-контракта>.new.estimateGas();
+ПРИМЕР: Pool.new.estimateGas();
+b) Получить стоимость вызова функции: <Название смарт-контракта>.<Название функции>.estimateGas();
+ПРИМЕР: Pool.vote.estimateGas()
