@@ -14,6 +14,9 @@ public class PoolController {
         this.poolService = poolService;
     }
 
+    /**
+     * @return contract address - 0xe17ca252d901b5154d5c5e6acdc078c261ea61fa
+     */
     @PostMapping("/contract/pool/deploy")
     String deployContract() throws Exception {
         return poolService.deployContract();

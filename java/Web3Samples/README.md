@@ -96,15 +96,21 @@ Summary
 
 ---Генерация java файлов
 СПОСОБ 1
-1. скопировать solidity/build/contracts/Pool.json
-2. перейти в директорию с web3j
-cd D:\dev\block-chain-playground\java\Web3Samples\web3j\web3j-3.3.1\web3j-3.3.1\bin
-3. сгенерировать код на java
-web3j truffle generate --javaTypes ./in/Pool.json -o ./out -p ss.bond
-4. скопировать полученный код в основной проект, в директорию: src/main/java/ss/bond/Web3Samples/contract
+1. скачать web3j-3.3.1 https://github.com/web3j/web3j/releases/download/v3.3.1/web3j-3.3.1.zip
+2. перейти в директорию с web3j: cd D:\dev\block-chain-playground\java\Web3Samples\web3j\web3j-3.3.1\web3j-3.3.1\bin
+3. создать директории: in, out
+4. скопировать solidity/build/contracts/Pool.json в директорию in
+5. сгенерировать код на java: web3j truffle generate --javaTypes ./in/Pool.json -o ./out -p ss.bond
+6. скопировать полученный код в основной проект, в директорию: src/main/java/org/web3j/model
 
 СПОСОБ 2
-1. раскомментировать то что законментировано в <!-- [1] кодогенерация для смарт контракта -->
-2. Вызвать генерацию через плагин мавена: maven web3j:web3j-maven-plugin:4.9.4:generate-sources
-3. откатить изменения в шаге 1.
-4. maven clean compile
+1. maven clean compile
+2. раскомментировать то что законментировано в <!-- [1] кодогенерация для смарт контракта -->
+3. Вызвать генерацию через плагин мавена: maven web3j:web3j-maven-plugin:4.9.4:generate-sources
+4. откатить изменения в шаге 1.
+5. maven clean compile
+
+---Получение эстимейта gasLimit
+1. Переходим папку в которой хранится проект truffle: cd solidity
+2. Войти в консоль truffle: truffle develop или truffle console
+3. Получить стоимость: <Название смарт-контракта>.new.estimateGas(); Pool.new.estimateGas();
