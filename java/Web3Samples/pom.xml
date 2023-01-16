@@ -25,13 +25,15 @@
 			<version>4.9.4</version>
 		</dependency>
 
-		<!-- Генерация wrappers для вызова контрактов из Java кода-->
+		<!-- Генерация wrappers для вызова контрактов из Java кода -->
+		<!-- TODO сама зависимость как-то влияет на spring и из-за этого он не запускает http сервер -->
+		<!-- TODO есть 2 варианта решения: 1) найти из-за чего конфликт 2) использовать многомодульный проект -->
+		<!-- [1] кодогенерация для смарт контракта
 		<dependency>
 			<groupId>org.web3j</groupId>
 			<artifactId>web3j-maven-plugin</artifactId>
 			<version>4.9.4</version>
-		</dependency>
-
+		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -60,6 +62,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- [1] кодогенерация для смарт контракта
 			<plugin>
 				<groupId>org.web3j</groupId>
 				<artifactId>web3j-maven-plugin</artifactId>
@@ -67,7 +70,7 @@
 				<configuration>
 					<soliditySourceFiles/>
 				</configuration>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
 

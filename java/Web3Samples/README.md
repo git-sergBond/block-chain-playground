@@ -104,4 +104,7 @@ web3j truffle generate --javaTypes ./in/Pool.json -o ./out -p ss.bond
 4. скопировать полученный код в основной проект, в директорию: src/main/java/ss/bond/Web3Samples/contract
 
 СПОСОБ 2
-Вызвать генерацию через плагин мавена: maven web3j:web3j-maven-plugin:4.9.4:generate-sources
+1. раскомментировать то что законментировано в <!-- [1] кодогенерация для смарт контракта -->
+2. Вызвать генерацию через плагин мавена: maven web3j:web3j-maven-plugin:4.9.4:generate-sources
+3. откатить изменения в шаге 1.
+4. maven clean compile
