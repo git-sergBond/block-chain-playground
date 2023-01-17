@@ -37,10 +37,22 @@ public class EthEventService {
 
         // subscribe to events
         web3j.ethLogFlowable(filter).subscribe(
-                event -> logger.info("Event received: {}", event),
+                event -> logger.info("Event received (encoded): {}", event),
                 error -> logger.error("Error: ", error)
         );
 
         return filter;
     }
+
+    /*
+    ALTERNATIVE WAY:
+    Pool pool = loadContract(address);
+    pool.votedEventFlowable(
+                DefaultBlockParameterName.LATEST,
+                DefaultBlockParameterName.LATEST
+        ).subscribe(
+                event -> logger.info("Event received: {}", event),
+                error -> logger.error("Error: ", error)
+        );
+     */
 }

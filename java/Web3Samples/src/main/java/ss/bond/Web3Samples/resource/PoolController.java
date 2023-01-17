@@ -1,7 +1,7 @@
 package ss.bond.Web3Samples.resource;
 
 import org.springframework.web.bind.annotation.*;
-import org.web3j.protocol.core.methods.response.Log;
+import org.web3j.model.Pool;
 import ss.bond.Web3Samples.dto.ChoiceWthKeysDto;
 import ss.bond.Web3Samples.service.PoolService;
 
@@ -39,10 +39,36 @@ public class PoolController {
      *     "privateKey" : "0ab77efb866fac8835d0a11e6b1462005654e6ffd3c320e75df46f6362cb3a10",
      *     "choice" : 1
      * }
+     * @return [
+     *     {
+     *         "log": {
+     *             "removed": false,
+     *             "logIndex": 0,
+     *             "transactionIndex": 0,
+     *             "transactionHash": "0xd6e006e71e854e2f1b2abae46f34dbb22a75ed0181b96a61d1ab691fe8fa42b2",
+     *             "blockHash": "0xbb50514d48630892a93f5131cef73b508c3b6f33243344b0b59278ebe96639a6",
+     *             "blockNumber": 10,
+     *             "address": "0x196aed2a0beb73518394d811d181a224ce14273d",
+     *             "data": "0x000000000000000000000000d912d5a664708a1b9349f43ec6ec293ff056c94b0000000000000000000000000000000000000000000000000000000000000001",
+     *             "type": null,
+     *             "topics": [
+     *                 "0x4d99b957a2bc29a30ebd96a7be8e68fe50a3c701db28a91436490b7d53870ca4"
+     *             ],
+     *             "transactionIndexRaw": "0x0",
+     *             "logIndexRaw": "0x0",
+     *             "blockNumberRaw": "0xa"
+     *         },
+     *
+     *         "_voter": "0xd912d5a664708a1b9349f43ec6ec293ff056c94b",
+     *         "_value": 1
+     *     }
+     *
+     *     !!! NOTE: VALUES GO AFTER "log" value. For example is: "_voter" AND "_value" !!!
+     * ]
      */
     @PostMapping("/contract/pool/vote/{contract-address}")
-    List<Log> vote(@RequestBody ChoiceWthKeysDto choiseDto,
-                   @PathVariable("contract-address") String contractAddress) throws Exception {
+    List<Pool.VotedEventResponse> vote(@RequestBody ChoiceWthKeysDto choiseDto,
+                                       @PathVariable("contract-address") String contractAddress) throws Exception {
         return poolService.vote(choiseDto.getChoice(), choiseDto.getPrivateKey(), contractAddress);
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
 import org.web3j.model.Pool;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.methods.response.Log;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
@@ -44,14 +43,16 @@ public class PoolService {
        return loadContract(contractAddress, getMasterCredentials()).getPool().send();
     }
 
-    public List<Log> vote(BigInteger choice, String privateKey, String contractAddress) throws Exception {
-        Credentials userCredentials = Credentials.create(privateKey);
-
+    public List<Pool.VotedEventResponse> vote(BigInteger choice,
+                                              String privateKey,
+                                              String contractAddress) throws Exception {
         eventService.subscribeToEvents(contractAddress);
 
-        TransactionReceipt receipt = loadContract(contractAddress, userCredentials).vote(choice).send();
-
-        return receipt.getLogs();
+        Credentials userCredentials = Credentials.create(privateKey);
+        Pool pool = loadContract(contractAddress, userCredentials);
+        TransactionReceipt receipt = pool.vote(choice).send();
+        logger.info("TransactionReceipt[vote] contractAddress={} receipt={}", contractAddress, receipt);
+        return Pool.getVotedEvents(receipt);
     }
 
     private Credentials getMasterCredentials() {
