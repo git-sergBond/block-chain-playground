@@ -25,10 +25,13 @@ public class PoolService {
 
     private final Web3j web3j;
 
+    private final EthEventService eventService;
+
     private Logger logger = LoggerFactory.getLogger(PoolService.class);
 
-    public PoolService(Web3j web3j) {
+    public PoolService(Web3j web3j, EthEventService eventService) {
         this.web3j = web3j;
+        this.eventService = eventService;
     }
 
     public String deployContract() throws Exception {
@@ -43,6 +46,8 @@ public class PoolService {
 
     public List<Log> vote(BigInteger choice, String privateKey, String contractAddress) throws Exception {
         Credentials userCredentials = Credentials.create(privateKey);
+
+        eventService.subscribeToEvents(contractAddress);
 
         TransactionReceipt receipt = loadContract(contractAddress, userCredentials).vote(choice).send();
 
