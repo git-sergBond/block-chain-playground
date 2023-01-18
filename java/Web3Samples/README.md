@@ -1,3 +1,6 @@
+##### API
+Можно импортировать файл ```postman_collection.json``` в программу Postman, чтобы не создавать http запросы вручную
+
 #### ВАЖНО: после деплоя контракта, нужно обновить dapp.eth-node и dapp.master-private-key в application.properties
 - ```dapp.eth-node``` - http url полключения к eth Node
 - ```dapp.master-private-key``` - закрытый ключ, с помощью которого вы будете подписывать транзакции со стороны сервера (бекенда)
