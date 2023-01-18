@@ -7,20 +7,38 @@ contract Pool {
         uint _value
     );
 
-    mapping(address => uint) public votes;
+    uint[] proposals;
+    mapping(address => uint) votes;
 
-    string poolSubject = "Coffee??? 1- YES / 2 - NO";
+    string poolSubject;
+
+    constructor(uint proposalCount, string memory subject) {
+        proposals = new uint[](proposalCount);
+        poolSubject = subject;
+    }
 
     function getPool() public view returns (string memory) {
-       return poolSubject;
+        return poolSubject;
     }
 
     function vote(uint selection) public {
         emit Voted(msg.sender, selection);
-        
+
         require (votes[msg.sender] == 0);
-        require (selection > 0 && selection <=2);
+        require (selection > 0 && selection <= proposals.length);
 
         votes[msg.sender] = selection;
+        proposals[selection]++;
+    }
+
+    function getResult() public view returns (uint winningProposal) {
+        uint winningVoteCount = 0;
+        for (uint prop = 0; prop < proposals.length; prop++) {
+            uint voteCount = proposals[prop];
+            if (voteCount > winningVoteCount) {
+                winningVoteCount = voteCount;
+                winningProposal = prop;
+            }
+        }
     }
 }

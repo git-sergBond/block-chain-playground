@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.web3j.model.Pool;
 import ss.bond.Web3Samples.dto.ChoiceWthKeysDto;
+import ss.bond.Web3Samples.dto.DeployPoolDto;
 import ss.bond.Web3Samples.service.PoolService;
 
 import java.math.BigInteger;
@@ -23,11 +24,15 @@ public class PoolController {
     }
 
     /**
+     * @param dto {
+     *     "subject":"Выбираем президента США 0) Байден 1) Трамп 2) Путин :)",
+     *     "proposalCount":3
+     * }
      * @return contract address - 0xe17ca252d901b5154d5c5e6acdc078c261ea61fa
      */
     @PostMapping("/contract/pool/deploy")
-    String deployContract() throws Exception {
-        return poolService.deployContract();
+    String deployContract(@RequestBody DeployPoolDto dto) throws Exception {
+        return poolService.deployContract(dto.getSubject(), dto.getProposalCount());
     }
 
     /**

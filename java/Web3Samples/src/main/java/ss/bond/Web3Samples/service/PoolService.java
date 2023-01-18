@@ -19,24 +19,27 @@ import java.util.List;
 @Service
 public class PoolService {
 
-    BigInteger gasLimit = BigInteger.valueOf(357038);//generated value in truffle (console) by CMD: Pool.new.estimateGas();
+    BigInteger gasLimit = BigInteger.valueOf(507770);//generated value in truffle (console) by CMD: Pool.new.estimateGas();
     BigInteger gasPrice = DefaultGasProvider.GAS_PRICE;
 
     private Logger logger = LoggerFactory.getLogger(PoolService.class);
 
     private final Web3j web3j;
+    private final Credentials masterCredentials;
     private final EthEventService eventService;
     private final LoadContractService loadContractService;
 
-    public PoolService(Web3j web3j, EthEventService eventService, LoadContractService loadContractService) {
+    public PoolService(Web3j web3j, Credentials masterCredentials,
+                       EthEventService eventService, LoadContractService loadContractService) {
         this.web3j = web3j;
+        this.masterCredentials = masterCredentials;
         this.eventService = eventService;
         this.loadContractService = loadContractService;
     }
 
-    public String deployContract() throws Exception {
+    public String deployContract(String subject, BigInteger proposalCount) throws Exception {
         ContractGasProvider gasProvider = new StaticGasProvider(gasPrice, gasLimit);
-        Pool deployedContract = Pool.deploy(web3j, getMasterCredentials(), gasProvider).send();
+        Pool deployedContract = Pool.deploy(web3j, masterCredentials, gasProvider, proposalCount, subject).send();
         return deployedContract.getContractAddress();
     }
 
@@ -62,11 +65,6 @@ public class PoolService {
     }
 
     private Pool loadContractWithMasterCredentials(String contractAddress) throws IOException {
-        return loadContractService.loadContract(contractAddress, getMasterCredentials());
-    }
-
-    private Credentials getMasterCredentials() {
-        String signerPrivateKey = "0ab77efb866fac8835d0a11e6b1462005654e6ffd3c320e75df46f6362cb3a10";
-        return Credentials.create(signerPrivateKey);
+        return loadContractService.loadContract(contractAddress, masterCredentials);
     }
 }
