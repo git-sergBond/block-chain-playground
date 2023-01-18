@@ -1,15 +1,18 @@
 package ss.bond.Web3Samples.resource;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
-import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthBlockNumber;
-import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import ss.bond.Web3Samples.dto.SendMoneyDto;
 import ss.bond.Web3Samples.service.GeneralService;
 
 import java.io.IOException;
@@ -74,5 +77,10 @@ public class GeneralController {
     @GetMapping("/get-wallet/{fileName}")
     Credentials getWallet(@PathVariable String fileName) throws CipherException, IOException {
         return generalService.getWallet(fileName);
+    }
+
+    @PostMapping("/send-money")
+    TransactionReceipt sendMoney(@RequestBody SendMoneyDto dto) throws Exception {
+        return generalService.sendMoney(dto.getFromPrivateKey(), dto.getToAddress(), dto.getAmount());
     }
 }

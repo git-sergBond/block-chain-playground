@@ -10,9 +10,15 @@ import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthBlockNumber;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.tx.RawTransactionManager;
+import org.web3j.tx.TransactionManager;
+import org.web3j.tx.Transfer;
+import org.web3j.utils.Convert;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -53,4 +59,15 @@ public class GeneralService {
     public Credentials getWallet(String fileName) throws CipherException, IOException {
         return WalletUtils.loadCredentials(KEY_STORE_PASSWORD, KEY_STORE_PATH + '\\' + fileName);
     }
+
+    public TransactionReceipt sendMoney(String fromPrivateKey,
+                                        String toAddress,
+                                        BigDecimal amount) throws Exception {
+        Credentials from = Credentials.create(fromPrivateKey);
+        TransactionManager txManager = new RawTransactionManager(web3j, from);
+        Transfer transfer = new Transfer(web3j, txManager);
+        return transfer.sendFunds(toAddress, amount, Convert.Unit.ETHER).send();
+    }
+
+    //TODO TransactionManager.getCode() - этим методом можно получить скомпилирвоанный код контракта
 }

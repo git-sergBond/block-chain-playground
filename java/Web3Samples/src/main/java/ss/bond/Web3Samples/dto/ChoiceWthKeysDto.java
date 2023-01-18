@@ -1,6 +1,7 @@
 package ss.bond.Web3Samples.dto;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 public class ChoiceWthKeysDto {
 
@@ -33,5 +34,18 @@ public class ChoiceWthKeysDto {
 
     public void setChoice(BigInteger choice) {
         this.choice = choice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChoiceWthKeysDto that = (ChoiceWthKeysDto) o;
+        return privateKey.equals(that.privateKey) && choice.equals(that.choice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(privateKey, choice);
     }
 }
