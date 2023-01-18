@@ -1,10 +1,11 @@
----Установка truffle (фреймворк для тестирования смарт-контрактов)
-1. npm install truffle -g
+##### Установка truffle (фреймворк для тестирования смарт-контрактов)
+Установка, производится с помощью npm: ```npm install truffle -g```
 
----Запуск тестовой стети СПОСОБ-1:
-1. cd solidity - переходим папку в которой будут храниться исходные коды контрактов
-2. truffle develop
-CMD OUTPUT:
+##### Запуск тестовой стети СПОСОБ-1:
+1. переходим папку в которой будут храниться исходные коды контрактов, командой ```cd solidity```
+2. запускаем тестовый сервер, командой ```truffle develop```.
+<br/>В терминал будет напечатано примерно следующее:
+```
 Truffle Develop started at http://127.0.0.1:9545/
 
 Accounts:
@@ -32,11 +33,13 @@ Private Keys:
 (9) 95afa232388866369414125f613011f91fdbaa822ee531604319d911ff1770eb
 
 Mnemonic: sad soul flame tumble venture easily devote math globe sight gospel cannon
+```
 
----Запуск тестовой стети СПОСОБ-2:
-1. Установка: npm install -g ganache-cli
-2. Запуск: ganache-cli
-CMD OUTPUT:
+##### Запуск тестовой стети СПОСОБ-2:
+1. Установка, производится с помощью npm: ```npm install -g ganache-cli```
+2. Запуск: ```ganache-cli```
+<br/>В терминал будет напечатано примерно следующее:
+```
 Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 Available Accounts
 ==================
@@ -76,19 +79,20 @@ Call Gas Limit
 ==================
 9007199254740991
 Listening on 127.0.0.1:8545
+```
 
+##### Компиляция контракта
+1. ```cd solidity``` - переходим папку в которой будут храниться исходные коды контрактов
+2. ```truffle init``` - инициализация truffle проекта
+3. Копируете ```Pool.sol``` в ```solidity/contracts```
+4. ```truffle compile``` - в папке build/contracts должен появиться скомпилированный контракт
 
----Компиляция контракта
-1. cd solidity - переходим папку в которой будут храниться исходные коды контрактов
-2. truffle init - инициализация truffle проекта
-3. Копируете Pool.sol в solidity/contracts
-4. truffle compile - в папке build/contracts должен появиться скомпилированный контракт
-
----Деплой контракта
-1. cd solidity - переходим папку в которой будут храниться исходные коды контрактов
-2. Копировать 1_first_migration.js в solidity/migrations
-3. truffle migrate
-CMD OUTPUT:
+##### Деплой контракта
+1. ```cd solidity``` - переходим папку в которой будут храниться исходные коды контрактов
+2. Копировать ```1_first_migration.js``` в ```solidity/migrations```
+3. ```truffle migrate```
+В терминал будет напечатано примерно следующее:
+```
 Compiling your contracts...
 
 ===========================
@@ -99,19 +103,14 @@ Compiling your contracts...
 > Compiled successfully using:
    - solc: 0.8.17+commit.8df45f5f.Emscripten.clang
 
-
-
-
 Starting migrations...
 ======================
 > Network name:    'develop'
 > Network id:      5777
 > Block gas limit: 6721975 (0x6691b7)
 
-
 1_first_migration.js
 ====================
-
 
    Deploying 'Pool'
    ----------------
@@ -129,7 +128,6 @@ Starting migrations...
    > value sent:          0 ETH
    > total cost:          0.00120500325 ETH
 
-
    > Saving artifacts
    -------------------------------------
    > Total cost:       0.00120500325 ETH
@@ -138,30 +136,30 @@ Summary
 =======
 > Total deployments:   1
 > Final cost:          0.00120500325 ETH
+```
 
----Генерация java файлов
-СПОСОБ 1
-1. скачать web3j-3.3.1 https://github.com/web3j/web3j/releases/download/v3.3.1/web3j-3.3.1.zip
-2. перейти в директорию с web3j: cd D:\dev\block-chain-playground\java\Web3Samples\web3j\web3j-3.3.1\web3j-3.3.1\bin
-3. создать директории: in, out
-4. скопировать solidity/build/contracts/Pool.json в директорию in
-5. сгенерировать код на java: web3j truffle generate --javaTypes ./in/Pool.json -o ./out -p ss.bond
-6. скопировать полученный код в основной проект, в директорию: src/main/java/org/web3j/model
+##### Генерация java файлов СПОСОБ-1
+1. скачать ```web3j-3.3.1``` https://github.com/web3j/web3j/releases/download/v3.3.1/web3j-3.3.1.zip
+2. перейти в директорию с web3j: ```cd D:\dev\block-chain-playground\java\Web3Samples\web3j\web3j-3.3.1\web3j-3.3.1\bin```
+3. создать директории: ```in```, ```out```
+4. скопировать ```solidity/build/contracts/Pool.json``` в директорию ```in```
+5. сгенерировать код на java:``` web3j truffle generate --javaTypes ./in/Pool.json -o ./out -p ss.bond```
+6. скопировать полученный код в основной проект, в директорию: ```src/main/java/org/web3j/model```
 
-СПОСОБ 2
-1. предварительно удалить линие директории, внутри resources/solidity
-Например: если вы компилировали Pool.sol в RemixIDE,
-то IDE могла создать директорию artefacts, эта директория помешает вам сгенерировать java код из-за ошибки
-2. maven clean compile
+##### Генерация java файлов СПОСОБ-2
+1. предварительно удалить линие директории, внутри ```resources/solidity```.
+Например: если вы компилировали ```Pool.sol``` в ```RemixIDE```,
+то IDE могла создать директорию ```artefacts```, эта директория помешает вам сгенерировать java код из-за ошибки
+2. ```maven clean compile```
 3. раскомментировать то что законментировано в <!-- [1] кодогенерация для смарт контракта -->
-4. Вызвать генерацию через плагин мавена: mvn org.web3j:web3j-maven-plugin:4.9.4:generate-sources
+4. Вызвать генерацию через плагин мавена: ```mvn org.web3j:web3j-maven-plugin:4.9.4:generate-sources```
 5. откатить изменения в шаге 1.
-6. maven clean compile
+6. ```maven clean compile```
 
----Получение эстимейта gasLimit
-1. Переходим папку в которой хранится проект truffle: cd solidity
-2. Войти в консоль truffle: truffle develop или truffle console
-a) Получить стоимость деплоя контрактов: <Название смарт-контракта>.new.estimateGas();
-ПРИМЕР: Pool.new.estimateGas();
-b) Получить стоимость вызова функции: <Название смарт-контракта>.<Название функции>.estimateGas();
-ПРИМЕР: Pool.vote.estimateGas()
+##### Получение эстимейта (gasLimit)
+1. Переходим папку в которой хранится проект truffle: ```cd solidity```
+2. Войти в консоль truffle: ```truffle develop``` или ```truffle console```
+- Получить стоимость деплоя контрактов: ```<Название смарт-контракта>.new.estimateGas();```
+ПРИМЕР: ```Pool.new.estimateGas();```
+- Получить стоимость вызова функции: ```<Название смарт-контракта>.<Название функции>.estimateGas();```
+ПРИМЕР: ```Pool.vote.estimateGas()```
