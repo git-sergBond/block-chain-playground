@@ -1,7 +1,7 @@
----Установка
+---Установка truffle (фреймворк для тестирования смарт-контрактов)
 1. npm install truffle -g
 
----Запуск тестовой стети
+---Запуск тестовой стети СПОСОБ-1:
 1. cd solidity - переходим папку в которой будут храниться исходные коды контрактов
 2. truffle develop
 CMD OUTPUT:
@@ -32,6 +32,51 @@ Private Keys:
 (9) 95afa232388866369414125f613011f91fdbaa822ee531604319d911ff1770eb
 
 Mnemonic: sad soul flame tumble venture easily devote math globe sight gospel cannon
+
+---Запуск тестовой стети СПОСОБ-2:
+1. Установка: npm install -g ganache-cli
+2. Запуск: ganache-cli
+CMD OUTPUT:
+Ganache CLI v6.12.2 (ganache-core: 2.13.2)
+Available Accounts
+==================
+(0) 0xC1e4f82Bc8F3706f88cf10B3D2c6326B2EEec2C5 (100 ETH)
+(1) 0xDBfa38B87Cd9C466Dfcf54FFc9aC95A7389B5f25 (100 ETH)
+(2) 0x713F132e1a115848A13D211755Eda31414a1AcF8 (100 ETH)
+(3) 0x90041Df8208E5C366f98B7309B8Dd4eD90CCC089 (100 ETH)
+(4) 0x5465F3D079Fc5d3A978Ea47268944c19227A778a (100 ETH)
+(5) 0xdd3B2463D898209337A13245D7384A653aE501c0 (100 ETH)
+(6) 0x91575cB4BE8fAa2b7ac10ea96b733c2703EC82A3 (100 ETH)
+(7) 0xdEA320e19047cF8230eb77D95f00FD610C36E217 (100 ETH)
+(8) 0xB516cdeCE26d6765629D0C35563741a2aa1B7dc5 (100 ETH)
+(9) 0xEB5727A7F82632deA12394E133505532111Ca6FC (100 ETH)
+Private Keys
+==================
+(0) 0xf94f3e4ae547fdfcd6f19a9998ad70d1b09c7cc5d2158845d9bfcc86e9ce7e34
+(1) 0xd7595ae3ed33a66d7c379753d67eeaf491a83aad5207ca6895b1ac62d440b8d1
+(2) 0xc331a38e3bbdbb710b6dc8d6da450386c987bf610cb06e45d0dab8177113d47d
+(3) 0xb1b2a127f8b71f1cfad5ae80275c6a37e1878aa0e52a484c18581b521dbc2f45
+(4) 0x6a5e199dfd30192df2d1f0a1b24910ae646487c1a0d1aa96e4da7e525094405e
+(5) 0x8cca472d9a2ecbf7caf4533777bda94859b7a30c88adea0375858ccb43cc9a61
+(6) 0xe87ec11ad561c0a8eb325629ac67950790d22cc2b24dcf515242edd4ce5d0079
+(7) 0x4faf434546ff68e3736f5c0891626994f7b2a0d283b94030e4c07f4375c556ac
+(8) 0xe1eb23bc58eae5a216dbfd391d10418b2fc44b8948ea09d2b4e6970468fc767a
+(9) 0x626f43140abd60a3eda48007ae23fd06c532fefe1f2773a64d88a76d1d7fc6d8
+HD Wallet
+==================
+Mnemonic:      barrel wing suffer diet tape cruel envelope strategy short bundle plug sauce
+Base HD Path:  m/44'/60'/0'/0/{account_index}
+Gas Price
+==================
+20000000000
+Gas Limit
+==================
+6721975
+Call Gas Limit
+==================
+9007199254740991
+Listening on 127.0.0.1:8545
+
 
 ---Компиляция контракта
 1. cd solidity - переходим папку в которой будут храниться исходные коды контрактов

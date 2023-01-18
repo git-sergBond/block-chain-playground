@@ -10,6 +10,6 @@ public class Web3jConfig {
 
 	@Bean
 	Web3j web3j() {
-		return Web3j.build(new HttpService("http://127.0.0.1:9545/"));
+		return Web3j.build(new HttpService("http://127.0.0.1:8545/"));
 	}
 }

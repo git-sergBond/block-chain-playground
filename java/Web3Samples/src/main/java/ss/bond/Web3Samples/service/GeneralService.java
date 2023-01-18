@@ -19,6 +19,7 @@ import org.web3j.utils.Convert;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -63,10 +64,13 @@ public class GeneralService {
     public TransactionReceipt sendMoney(String fromPrivateKey,
                                         String toAddress,
                                         BigDecimal amount) throws Exception {
+        BigInteger GAS_LIMIT = BigInteger.valueOf(6721975L);
+        BigInteger GAS_PRICE = BigInteger.valueOf(20000000000L);
+
         Credentials from = Credentials.create(fromPrivateKey);
         TransactionManager txManager = new RawTransactionManager(web3j, from);
         Transfer transfer = new Transfer(web3j, txManager);
-        return transfer.sendFunds(toAddress, amount, Convert.Unit.ETHER).send();
+        return transfer.sendFunds(toAddress, amount, Convert.Unit.ETHER, GAS_PRICE, GAS_LIMIT).send();
     }
 
     //TODO TransactionManager.getCode() - этим методом можно получить скомпилирвоанный код контракта
