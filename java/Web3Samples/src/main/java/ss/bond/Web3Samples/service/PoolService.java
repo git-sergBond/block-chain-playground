@@ -11,6 +11,7 @@ import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 import org.web3j.tx.gas.StaticGasProvider;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class PoolService {
     }
 
     public String getPool(String contractAddress) throws Exception {
-       return loadContractService.loadContract(contractAddress, getMasterCredentials()).getPool().send();
+       return loadContractWithMasterCredentials(contractAddress).getPool().send();
     }
 
     public List<Pool.VotedEventResponse> vote(BigInteger choice,
@@ -54,6 +55,14 @@ public class PoolService {
         TransactionReceipt receipt = pool.vote(choice).send();
         logger.info("TransactionReceipt[vote] contractAddress={} receipt={}", contractAddress, receipt);
         return Pool.getVotedEvents(receipt);
+    }
+
+    public BigInteger getResult(String contractAddress) throws Exception {
+        return loadContractWithMasterCredentials(contractAddress).getResult().send();
+    }
+
+    private Pool loadContractWithMasterCredentials(String contractAddress) throws IOException {
+        return loadContractService.loadContract(contractAddress, getMasterCredentials());
     }
 
     private Credentials getMasterCredentials() {

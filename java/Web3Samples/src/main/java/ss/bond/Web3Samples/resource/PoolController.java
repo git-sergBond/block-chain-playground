@@ -9,6 +9,7 @@ import org.web3j.model.Pool;
 import ss.bond.Web3Samples.dto.ChoiceWthKeysDto;
 import ss.bond.Web3Samples.service.PoolService;
 
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -74,5 +75,13 @@ public class PoolController {
     List<Pool.VotedEventResponse> vote(@RequestBody ChoiceWthKeysDto choiseDto,
                                        @PathVariable("contract-address") String contractAddress) throws Exception {
         return poolService.vote(choiseDto.getChoice(), choiseDto.getPrivateKey(), contractAddress);
+    }
+
+    /**
+     * @param contractAddress - 0xe17ca252d901b5154d5c5e6acdc078c261ea61fa
+     */
+    @GetMapping("/contract/pool/get-result/{contract-address}")
+    BigInteger getResult(@PathVariable("contract-address") String contractAddress) throws Exception {
+        return poolService.getResult(contractAddress);
     }
 }
