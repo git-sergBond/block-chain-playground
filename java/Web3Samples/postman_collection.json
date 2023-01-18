@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "32695160-1934-4197-bd24-f9e4d2f5c432",
+		"name": "Java Web3Samples",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "general",
+			"item": [
+				{
+					"name": "get-block-number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/get-block-number",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get-block-number"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/get-accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get-accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-transaction-count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/get-transaction-count/0x0202577bd2322863292f159ee36ee2a4aa54665d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get-transaction-count",
+								"0x0202577bd2322863292f159ee36ee2a4aa54665d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/get-balance/0xEB5727A7F82632deA12394E133505532111Ca6FC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get-balance",
+								"0xEB5727A7F82632deA12394E133505532111Ca6FC"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate-wallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/generate-wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"generate-wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-wallet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/get-wallet/UTC--2023-01-16T09-44-14.773919300Z--44d5597848fc7562d9fd6c9a53626f4626f105d1.json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"get-wallet",
+								"UTC--2023-01-16T09-44-14.773919300Z--44d5597848fc7562d9fd6c9a53626f4626f105d1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send-money",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fromPrivateKey\":\"f94f3e4ae547fdfcd6f19a9998ad70d1b09c7cc5d2158845d9bfcc86e9ce7e34\",\r\n    \"toAddress\":\"0xEB5727A7F82632deA12394E133505532111Ca6FC\",\r\n    \"amount\":\"80\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/send-money",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"send-money"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pool contract",
+			"item": [
+				{
+					"name": "deploy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\":\"Выбираем президента США 0) Байден 1) Трамп 2) Путин :)\",\r\n    \"proposalCount\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/contract/pool/deploy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contract",
+								"pool",
+								"deploy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "function getPool",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contract/pool/get-pool/0x547e3c3b7420874c752b59cdc3133656d2018df0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contract",
+								"pool",
+								"get-pool",
+								"0x547e3c3b7420874c752b59cdc3133656d2018df0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "function vote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"privateKey\" : \"0xc7fe8f22aa0918fa0d26b10344567303c9ea530ceee4e91207b468f58a4f4013\",\r\n    \"choice\" : 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/contract/pool/vote/0x547e3c3b7420874c752b59cdc3133656d2018df0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contract",
+								"pool",
+								"vote",
+								"0x547e3c3b7420874c752b59cdc3133656d2018df0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "function get-result",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/contract/pool/get-result/0x547e3c3b7420874c752b59cdc3133656d2018df0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contract",
+								"pool",
+								"get-result",
+								"0x547e3c3b7420874c752b59cdc3133656d2018df0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

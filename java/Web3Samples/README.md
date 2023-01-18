@@ -1,4 +1,6 @@
-#### ВАЖНО: после деплоя контракта, нужно обновить private key в функции Web3jConfig.masterCredentials() на один из тех которые сгенерировались в Private Keys (в терминале)
+#### ВАЖНО: после деплоя контракта, нужно обновить dapp.eth-node и dapp.master-private-key в application.properties
+- ```dapp.eth-node``` - http url полключения к eth Node
+- ```dapp.master-private-key``` - закрытый ключ, с помощью которого вы будете подписывать транзакции со стороны сервера (бекенда)
 
 ##### Установка truffle (фреймворк для тестирования смарт-контрактов)
 Установка, производится с помощью npm: ```npm install truffle -g```
