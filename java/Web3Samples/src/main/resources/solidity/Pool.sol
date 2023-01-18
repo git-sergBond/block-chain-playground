@@ -7,10 +7,15 @@ contract Pool {
         uint _value
     );
 
-    uint[2] proposals;
+    uint[] proposals;
     mapping(address => uint) votes;
 
-    string poolSubject = "Coffee??? 1- YES / 2 - NO";
+    string poolSubject;
+
+    constructor(uint proposalCount, string memory subject) {
+        proposals = new uint[](proposalCount);
+        poolSubject = subject;
+    }
 
     function getPool() public view returns (string memory) {
        return poolSubject;
