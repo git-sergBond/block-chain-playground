@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class PoolService {
 
-    BigInteger gasLimit = BigInteger.valueOf(507770);//generated value in truffle (console) by CMD: Pool.new.estimateGas();
+    BigInteger gasLimit = BigInteger.valueOf(507770);//See: README.md Получение эстимейта (gasLimit)
     BigInteger gasPrice = DefaultGasProvider.GAS_PRICE;
 
     private Logger logger = LoggerFactory.getLogger(PoolService.class);
