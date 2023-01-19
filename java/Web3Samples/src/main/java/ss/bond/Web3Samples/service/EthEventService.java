@@ -8,6 +8,7 @@ import org.web3j.model.Pool;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.EthFilter;
+import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -54,7 +55,7 @@ public class EthEventService {
     private EthFilter logDecoded(EthFilter filter,
                                  String contractAddress,
                                  Credentials credentials) throws IOException {
-        Pool pool = loadContractService.loadContract(contractAddress, credentials);
+        Pool pool = loadContractService.loadContract(contractAddress, credentials, DefaultGasProvider.GAS_LIMIT);
 
         // subscribe to events
         pool.votedEventFlowable(filter).subscribe(

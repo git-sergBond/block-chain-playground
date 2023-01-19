@@ -15,10 +15,6 @@ import java.math.BigInteger;
 
 @Service
 public class LoadContractService {
-
-    BigInteger gasLimit = BigInteger.valueOf(357038);//generated value in truffle (console) by CMD: Pool.new.estimateGas();
-    BigInteger gasPrice = DefaultGasProvider.GAS_PRICE;
-
     private Logger logger = LoggerFactory.getLogger(PoolService.class);
 
     private final Web3j web3j;
@@ -27,8 +23,8 @@ public class LoadContractService {
         this.web3j = web3j;
     }
 
-    public Pool loadContract(String contractAddress, Credentials credentials) throws IOException {
-        ContractGasProvider gasProvider = new StaticGasProvider(gasPrice, gasLimit);
+    public Pool loadContract(String contractAddress, Credentials credentials, BigInteger gasLimit) throws IOException {
+        ContractGasProvider gasProvider = new StaticGasProvider(DefaultGasProvider.GAS_PRICE, gasLimit);
         Pool pool = Pool.load(contractAddress, web3j, credentials, gasProvider);
         logger.info("loadContract - contractAddress={} isValid={}", contractAddress, pool.isValid());
         return pool;

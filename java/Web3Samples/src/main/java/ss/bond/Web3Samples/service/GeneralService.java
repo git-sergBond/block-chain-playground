@@ -53,7 +53,8 @@ public class GeneralService {
         return web3j.ethGetBalance(address, DefaultBlockParameter.valueOf("latest")).sendAsync().get();
     }
 
-    public String generateWallet() throws InvalidAlgorithmParameterException, CipherException, IOException, NoSuchAlgorithmException, NoSuchProviderException {
+    public String generateWallet() throws InvalidAlgorithmParameterException, CipherException,
+            IOException, NoSuchAlgorithmException, NoSuchProviderException {
         return WalletUtils.generateNewWalletFile(KEY_STORE_PASSWORD, new File(KEY_STORE_PATH), true);
     }
 

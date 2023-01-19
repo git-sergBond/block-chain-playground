@@ -167,12 +167,17 @@ Summary
 1. Переходим папку в которой хранится проект truffle: ```cd solidity```
 2. Войти в консоль truffle: ```truffle develop``` или ```truffle console```
 - Получить стоимость деплоя контрактов: ```<Название смарт-контракта>.new.estimateGas();```
-ПРИМЕР: ```Pool.new.estimateGas(3, "Выбираем ЯП для следующего проекта: 0) Java 1) NodeJS 2) Golang");```
+ПРИМЕР:
+```
+Pool.new.estimateGas(3, "Выбираем ЯП для следующего проекта: 0) Java 1) NodeJS 2) Golang"); //Estimate Gas for constructor
+```
 - Получить стоимость вызова функции: ```<Инстанс смарт-контракта>.<Название функции>.estimateGas(<Аргументы через запятую>);```
 ПРИМЕР:
 ```
 const instance = await Pool.deployed();
-await instance.vote.estimateGas(1);
+await instance.vote.estimateGas(1); 		//Estimate Gas for vote function
+await instance.getPool.estimateGas();		//Estimate Gas for getPool function
+await instance.getResult.estimateGas();		//Estimate Gas for getResult function
 ```
 ##### Получение эстимейта (gasLimit) СПОСОБ-2
 1. После деплоя контракта командой: ```truffle migrate```. Пишется количество использованного газа:

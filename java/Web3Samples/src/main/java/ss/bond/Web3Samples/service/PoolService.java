@@ -18,10 +18,6 @@ import java.util.List;
 
 @Service
 public class PoolService {
-
-    BigInteger gasLimit = BigInteger.valueOf(507770);//See: README.md Получение эстимейта (gasLimit)
-    BigInteger gasPrice = DefaultGasProvider.GAS_PRICE;
-
     private Logger logger = LoggerFactory.getLogger(PoolService.class);
 
     private final Web3j web3j;
@@ -38,13 +34,15 @@ public class PoolService {
     }
 
     public String deployContract(String subject, BigInteger proposalCount) throws Exception {
-        ContractGasProvider gasProvider = new StaticGasProvider(gasPrice, gasLimit);
+        BigInteger gasLimit = BigInteger.valueOf(507770);//See: README.md Получение эстимейта (gasLimit) //Estimate Gas for constructor
+        ContractGasProvider gasProvider = new StaticGasProvider(DefaultGasProvider.GAS_PRICE, gasLimit);
         Pool deployedContract = Pool.deploy(web3j, masterCredentials, gasProvider, proposalCount, subject).send();
         return deployedContract.getContractAddress();
     }
 
     public String getPool(String contractAddress) throws Exception {
-       return loadContractWithMasterCredentials(contractAddress).getPool().send();
+        BigInteger gasLimit = BigInteger.valueOf(21100);//See: README.md Получение эстимейта (gasLimit) //Estimate Gas for getPool function
+        return loadContractWithMasterCredentials(contractAddress, gasLimit).getPool().send();
     }
 
     public List<Pool.VotedEventResponse> vote(BigInteger choice,
@@ -54,17 +52,19 @@ public class PoolService {
 
         eventService.subscribeToEvents(contractAddress, userCredentials);
 
-        Pool pool = loadContractService.loadContract(contractAddress, userCredentials);
+        BigInteger gasLimit = BigInteger.valueOf(507770);//See: README.md Получение эстимейта (gasLimit) //Estimate Gas for vote function
+        Pool pool = loadContractService.loadContract(contractAddress, userCredentials, gasLimit);
         TransactionReceipt receipt = pool.vote(choice).send();
         logger.info("TransactionReceipt[vote] contractAddress={} receipt={}", contractAddress, receipt);
         return Pool.getVotedEvents(receipt);
     }
 
     public BigInteger getResult(String contractAddress) throws Exception {
-        return loadContractWithMasterCredentials(contractAddress).getResult().send();
+        BigInteger gasLimit = BigInteger.valueOf(21300);//See: README.md Получение эстимейта (gasLimit) //Estimate Gas for getResult function
+        return loadContractWithMasterCredentials(contractAddress, gasLimit).getResult().send();
     }
 
-    private Pool loadContractWithMasterCredentials(String contractAddress) throws IOException {
-        return loadContractService.loadContract(contractAddress, masterCredentials);
+    private Pool loadContractWithMasterCredentials(String contractAddress, BigInteger gasLimit) throws IOException {
+        return loadContractService.loadContract(contractAddress, masterCredentials, gasLimit);
     }
 }
