@@ -165,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"subject\":\"Выбираем президента США 0) Байден 1) Трамп 2) Путин :)\",\r\n    \"proposalCount\":3\r\n}",
+							"raw": "{\r\n    \"subject\":\"Выбираем ЯП для следующего проекта: 0) Java 1) NodeJS 2) Golang\",\r\n    \"proposalCount\":3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

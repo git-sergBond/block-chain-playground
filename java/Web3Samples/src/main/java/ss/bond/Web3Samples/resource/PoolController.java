@@ -25,7 +25,7 @@ public class PoolController {
 
     /**
      * @param dto {
-     *     "subject":"Выбираем президента США 0) Байден 1) Трамп 2) Путин :)",
+     *     "subject":"Выбираем ЯП для следующего проекта: 0) Java 1) NodeJS 2) Golang",
      *     "proposalCount":3
      * }
      * @return contract address - 0xe17ca252d901b5154d5c5e6acdc078c261ea61fa
