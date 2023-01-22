@@ -25,7 +25,7 @@ public class PoolController {
 
     /**
      * @param dto {
-     *     "subject":"Выбираем ЯП для следующего проекта: 0) Java 1) NodeJS 2) Golang",
+     *     "subject":"Выбираем ЯП для следующего проекта: 1) Java 2) NodeJS 3) Golang",
      *     "proposalCount":3
      * }
      * @return contract address - 0xe17ca252d901b5154d5c5e6acdc078c261ea61fa
@@ -84,6 +84,7 @@ public class PoolController {
 
     /**
      * @param contractAddress - 0xe17ca252d901b5154d5c5e6acdc078c261ea61fa
+     * @return 0 - default value (if nobody voted yet)
      */
     @GetMapping("/contract/pool/get-result/{contract-address}")
     BigInteger getResult(@PathVariable("contract-address") String contractAddress) throws Exception {

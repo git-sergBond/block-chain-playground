@@ -169,7 +169,7 @@ Summary
 - Получить стоимость деплоя контрактов: ```<Название смарт-контракта>.new.estimateGas();```
 ПРИМЕР:
 ```
-Pool.new.estimateGas(3, "Выбираем ЯП для следующего проекта: 0) Java 1) NodeJS 2) Golang"); //Estimate Gas for constructor
+Pool.new.estimateGas(3, "Выбираем ЯП для следующего проекта: 1) Java 2) NodeJS 3) Golang"); //Estimate Gas for constructor
 ```
 - Получить стоимость вызова функции: ```<Инстанс смарт-контракта>.<Название функции>.estimateGas(<Аргументы через запятую>);```
 ПРИМЕР:
